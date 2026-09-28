@@ -30,11 +30,11 @@ class HomePage extends StatelessWidget {
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 220,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          childAspectRatio: 0.62,
+          mainAxisExtent: 290,
         ),
         itemCount: dummyAnimals.length,
         itemBuilder: (context, index) {
