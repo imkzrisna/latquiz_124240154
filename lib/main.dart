@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           surfaceTintColor: Colors.transparent,
           titleTextStyle: TextStyle(
             color: Colors.white,
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
           systemOverlayStyle: SystemUiOverlayStyle.light,

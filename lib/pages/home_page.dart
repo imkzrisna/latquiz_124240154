@@ -11,13 +11,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Animals List',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: const Text('Animals List'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Colors.white),
             tooltip: 'Logout',
             onPressed: () {
               Navigator.pushReplacement(
@@ -26,6 +23,7 @@ class HomePage extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(width: 4),
         ],
       ),
       body: GridView.builder(
@@ -34,7 +32,7 @@ class HomePage extends StatelessWidget {
           maxCrossAxisExtent: 220,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
-          mainAxisExtent: 290,
+          mainAxisExtent: 270,
         ),
         itemCount: dummyAnimals.length,
         itemBuilder: (context, index) {
