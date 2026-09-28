@@ -1,7 +1,3 @@
-// DATA DUMMY HEWAN
-// List<Animal> berisi 6 objek Animal. HomePage membaca list ini lewat
-// GridView.builder (itemCount = dummyAnimals.length).
-
 import '../models/animal.dart';
 
 List<Animal> dummyAnimals = [

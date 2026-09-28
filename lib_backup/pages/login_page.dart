@@ -1,13 +1,7 @@
-// HALAMAN LOGIN
-// Alur: user isi username & password -> tekan Login -> _login() dijalankan
-//   cocok  -> pushReplacement ke HomePage
-//   salah  -> tampil SnackBar merah
-
 import 'package:flutter/material.dart';
-import '../data/data.dart'; // untuk membaca akun user1
+import '../data/data.dart';
 import 'home_page.dart';
 
-// StatefulWidget karena punya controller yang harus hidup selama halaman aktif.
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -16,11 +10,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Controller = "penghubung" untuk membaca teks yang diketik di TextField.
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // dispose() dipanggil saat halaman dihapus: bebaskan memori controller.
   @override
   void dispose() {
     _usernameController.dispose();
@@ -28,22 +20,17 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  // Dipanggil saat tombol Login ditekan.
   void _login() {
-    // trim() membuang spasi di awal/akhir username agar tidak salah input.
     final username = _usernameController.text.trim();
     final password = _passwordController.text;
 
     if (username == user1.username && password == user1.password) {
-      // LOGIN BERHASIL
-      // pushReplacement = halaman Login DIGANTI HomePage (bukan ditumpuk),
-      // jadi tombol back tidak bisa kembali ke Login.
+      // pushReplacement: Login Page diganti Home Page (tidak bisa kembali dengan back)
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
-      // LOGIN GAGAL: tampilkan SnackBar merah di bagian bawah layar.
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login gagal! Username atau password salah.'),
@@ -56,11 +43,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Center -> form berada di tengah layar.
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          // Card = kotak putih dengan bayangan (elevation).
           child: Card(
             elevation: 4,
             shape: RoundedRectangleBorder(
@@ -69,14 +54,13 @@ class _LoginPageState extends State<LoginPage> {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                // min = tinggi Column mengikuti isinya (tidak memenuhi layar).
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
                     'Login',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 24), // SizedBox = pemberi jarak
+                  const SizedBox(height: 24),
                   TextField(
                     controller: _usernameController,
                     decoration: const InputDecoration(
@@ -87,18 +71,17 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 16),
                   TextField(
                     controller: _passwordController,
-                    obscureText: true, // teks disamarkan jadi titik-titik
+                    obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // double.infinity = tombol selebar Card.
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _login, // panggil fungsi login
+                      onPressed: _login,
                       child: const Text('Login'),
                     ),
                   ),

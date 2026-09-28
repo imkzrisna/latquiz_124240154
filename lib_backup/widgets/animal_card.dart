@@ -1,13 +1,9 @@
-// WIDGET KARTU HEWAN
-// Dipisah dari home_page agar kode rapi dan bisa dipakai ulang.
-// Menerima data (animal) dan aksi klik (onTap) dari HomePage.
-
 import 'package:flutter/material.dart';
 import '../models/animal.dart';
 
 class AnimalCard extends StatelessWidget {
-  final Animal animal; // data hewan yang ditampilkan
-  final VoidCallback onTap; // fungsi yang dijalankan saat kartu diklik
+  final Animal animal;
+  final VoidCallback onTap;
 
   const AnimalCard({super.key, required this.animal, required this.onTap});
 
@@ -15,17 +11,15 @@ class AnimalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      clipBehavior: Clip.antiAlias, // isi ikut terpotong sesuai sudut membulat
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      // InkWell = membuat area bisa diklik + efek riak (ripple).
       child: InkWell(
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // rata kiri
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // FOTO: ClipRRect memberi sudut membulat pada gambar.
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: SizedBox(
@@ -33,13 +27,11 @@ class AnimalCard extends StatelessWidget {
                   width: double.infinity,
                   child: Image.network(
                     animal.image,
-                    fit: BoxFit.cover, // gambar memenuhi kotak (dipotong bila perlu)
-                    // Saat gambar masih diunduh -> tampilkan loading.
+                    fit: BoxFit.cover,
                     loadingBuilder: (context, child, progress) {
-                      if (progress == null) return child; // selesai dimuat
+                      if (progress == null) return child;
                       return const Center(child: CircularProgressIndicator());
                     },
-                    // Bila gagal dimuat (tanpa internet/URL salah) -> ikon rusak.
                     errorBuilder: (context, error, stack) => const Center(
                       child: Icon(Icons.broken_image, size: 40),
                     ),
@@ -47,21 +39,17 @@ class AnimalCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              // NAMA (dipotong "..." bila terlalu panjang)
               Text(
                 animal.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
-              // TIPE
               Text(
                 animal.type,
                 style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               ),
               const SizedBox(height: 8),
-              // HABITAT: Wrap = chip otomatis turun baris bila tidak muat.
-              // .map() mengubah tiap String habitat menjadi widget chip.
               Wrap(
                 spacing: 6,
                 runSpacing: 6,
@@ -77,7 +65,7 @@ class AnimalCard extends StatelessWidget {
                         child: Text(h, style: const TextStyle(fontSize: 11)),
                       ),
                     )
-                    .toList(), // hasil map() harus diubah kembali menjadi List
+                    .toList(),
               ),
             ],
           ),

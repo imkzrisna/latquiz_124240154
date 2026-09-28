@@ -1,28 +1,22 @@
-// HALAMAN DETAIL HEWAN
-// Menerima SATU objek Animal lewat constructor (dikirim dari HomePage),
-// lalu menampilkan seluruh datanya: foto, tipe, tinggi, berat, habitat, aktivitas.
-
 import 'package:flutter/material.dart';
 import '../models/animal.dart';
 
 class AnimalDetailPage extends StatelessWidget {
-  final Animal animal; // data yang diterima dari Home
+  final Animal animal;
 
   const AnimalDetailPage({super.key, required this.animal});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Tombol back TIDAK dibuat manual: karena halaman ini dibuka dengan
-      // Navigator.push, AppBar otomatis menampilkan panah back yang memanggil pop().
+      // Tombol back otomatis dari AppBar (Navigator.push -> pop)
       appBar: AppBar(title: Text(animal.name)),
-      // SingleChildScrollView -> halaman bisa di-scroll agar tidak overflow.
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // FOTO
+            // Foto
             SizedBox(
               height: 200,
               width: double.infinity,
@@ -40,7 +34,7 @@ class AnimalDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // INFO UMUM. '${...}' = menyisipkan nilai variabel ke dalam teks.
+            // Info umum
             const Text(
               'Animal Details:',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -51,7 +45,7 @@ class AnimalDetailPage extends StatelessWidget {
             Text('Weight : ${animal.weight} kg'),
             const SizedBox(height: 20),
 
-            // HABITAT (daftar -> chip)
+            // Habitat
             const Text(
               'Animal Habitat',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -60,7 +54,7 @@ class AnimalDetailPage extends StatelessWidget {
             _chips(animal.habitat),
             const SizedBox(height: 20),
 
-            // AKTIVITAS (daftar -> chip)
+            // Aktivitas
             const Text(
               'Animal Activities',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -73,8 +67,6 @@ class AnimalDetailPage extends StatelessWidget {
     );
   }
 
-  // Helper: mengubah List<String> menjadi deretan chip.
-  // Dipakai dua kali (habitat & aktivitas) agar tidak menulis kode yang sama.
   Widget _chips(List<String> items) {
     return Wrap(
       spacing: 8,
