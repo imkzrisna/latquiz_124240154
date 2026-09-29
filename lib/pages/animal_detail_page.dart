@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import '../models/animal.dart';
 import 'habitat_page.dart';
+import 'activities_page.dart';
 
 // Sekarang StatefulWidget karena ada data yang BERUBAH (status favorit).
 class AnimalDetailPage extends StatefulWidget {
@@ -128,6 +129,23 @@ class _AnimalDetailPageState extends State<AnimalDetailPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => HabitatPage(animal: animal),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                icon: const Icon(Icons.directions_run),
+                label: const Text('Lihat Aktivitas'),
+                onPressed: () {
+                  // push = ActivitiesPage ditumpuk di atas Detail (bisa back).
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ActivitiesPage(animal: animal),
                     ),
                   );
                 },
