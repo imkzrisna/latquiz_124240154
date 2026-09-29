@@ -7,6 +7,7 @@
 //  - klik logout  -> Navigator.pushReplacement ke LoginPage
 
 import 'package:flutter/material.dart';
+
 import '../data/animals_data.dart'; // sumber data (list dummyAnimals)
 import '../widgets/animal_card.dart'; // tampilan satu kartu
 import 'animal_detail_page.dart';
